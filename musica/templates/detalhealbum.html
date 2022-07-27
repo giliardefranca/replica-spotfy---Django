@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ object.titulo }}
+{% endblock %}
+
+{% block content %}
+<div class="bg-black text-gray-300 min-h-screen p-10">
+
+  <!-- header -->
+  <div class="flex 2xl:w-1/6 xl:w-1/5 lg:w-1/4 sm:w-1/3 px-3">
+    <img class="rounded-md sm:m-2 lg:m-16" src="{{ object.thumb.url }}">
+    <div class="flex flex-col justify-center">
+      <!-- content -->
+      <h4 class="mt-0 mb-2 uppercase text-gray-500 tracking-widest text-xs">Playlist</h4>
+      <h1 class="mt-0 mb-2 text-white text-4xl">{{ object.titulo }}</h1>
+      <p class="text-gray-600 text-sm">Created by <a> </a> {{ object.titulo }}</p>
+
+    </div>
+  </div>
+
+  <!-- action buttons -->
+  <div class="mt-6 flex justify-between">
+    <div class="flex">
+      <button class="mr-2 bg-green-500 text-black block w-20 h-20 py-2  rounded-full"><ion-icon name="play"  class="text-4xl"></ion-icon></button>
+      <button class="mr-2 text-green-500 block p-2 rounded-full"><ion-icon name="heart" class="text-4xl"></ion-icon></button>
+      <button class="mr-2  block p-2 rounded-full">...</button>
+    </div>
+  </div>
+
+  <!-- song list   -->
+  <div class="mt-10">
+    <!-- song list header -->
+    <div class="flex text-gray-600">
+      <div class="p-2 w-8 flex-shrink-0"></div>
+      <div class="p-2 w-8 flex-shrink-0"></div>
+      <div class="p-2 ">#</div>
+      <div class="p-2 w-full">Titulo</div>
+      <div class="p-2 w-full">ALBUM</div>
+      <div class="p-2 w-full">DATA ADDED</div>
+
+
+    </div>
+
+    {% for musica in object.musicas.all %}
+
+    <div class="flex border-b border-gray-800 hover:bg-gray-800">
+
+      <button class=""><ion-icon name="play" class="text-2xl" id="play-btn"></ion-icon></button>
+
+
+      <audio id="musica" src="{{ musica.musica.url }}"></audio>
+
+
+      <div class="p-3 w-8 flex-shrink-0">{{ forloop.counter }}</div>
+      <div class="p-3 w-8 flex-shrink-0">❤</div>
+      <div class="p-3 w-full">{{ musica.titulo }}</div>
+      <div class="p-3 w-full">{{ musica.album }}</div>
+      <div class="p-3 w-full">{{ musica.data.day }}/{{ musica.data.month }}/{{ musica.data.year }}</div>
+    </div>
+    {% endfor %}
+
+</div>
+</div>
+{% endblock %}
