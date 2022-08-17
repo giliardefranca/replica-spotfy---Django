@@ -1,2 +1,3 @@
-# replica spotfy - Django
- 
+# Replica spotfy - Django
+- Em desenvolvimento
+
