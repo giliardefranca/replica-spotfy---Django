@@ -6,27 +6,27 @@ def Romance(requests):
 
 
 def Sertanejo(requests):
-    romance = Album.objects.filter(categoria='SERTANEJO')
-    return {'sertanejo': romance}
+    sertanejo = Album.objects.filter(categoria='SERTANEJO')
+    return {'sertanejo': sertanejo}
 
 
 def Pop(requests):
-    romance = Album.objects.filter(categoria='POP')
-    return {'pop': romance}
+    pop = Album.objects.filter(categoria='POP')
+    return {'pop': pop}
 
 
 def Forro(requests):
-    romance = Album.objects.filter(categoria='FORRO')
-    return {'forro': romance}
+    forro = Album.objects.filter(categoria='FORRO')
+    return {'forro': forro}
 
 def Funk(requests):
-    romance = Album.objects.filter(categoria='FUNK')
-    return {'funk': romance}
+    funk = Album.objects.filter(categoria='FUNK')
+    return {'funk': funk}
 
 def Internacional(requests):
-    romance = Album.objects.filter(categoria='INTERNACIONAL')
-    return {'internacional': romance}
+    internacional = Album.objects.filter(categoria='INTERNACIONAL')
+    return {'internacional': internacional}
 
 def Brasil(requests):
-    romance = Album.objects.filter(categoria='BRASIL')
-    return {'brasil': romance}
+    brasil = Album.objects.filter(categoria='BRAZIL')
+    return {'brasil': brasil}

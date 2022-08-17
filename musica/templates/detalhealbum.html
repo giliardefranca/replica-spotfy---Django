@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
 {{ object.titulo }}
 {% endblock %}
+{% block head %}
+<style>
+.audioButton  button {
+display: none;
+}
+.audioButton:hover button{
+display: block;
+}
+
+
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="bg-black text-gray-300 min-h-screen p-10">
+<div class="bg-zinc-900 text-gray-300 min-h-screen p-10">
 
   <!-- header -->
   <div class="flex 2xl:w-1/6 xl:w-1/5 lg:w-1/4 sm:w-1/3 px-3">
@@ -22,44 +34,36 @@
   <!-- action buttons -->
   <div class="mt-6 flex justify-between">
     <div class="flex">
-      <button class="mr-2 bg-green-500 text-black block w-20 h-20 py-2  rounded-full"><ion-icon name="play"  class="text-4xl"></ion-icon></button>
-      <button class="mr-2 text-green-500 block p-2 rounded-full"><ion-icon name="heart" class="text-4xl"></ion-icon></button>
-      <button class="mr-2  block p-2 rounded-full">...</button>
+      <button onclick="playSong()" class="mr-2 bg-green-500 text-black block w-16 h-16  p-2  rounded-full" id="play-vd"><ion-icon name="play"  class="text-3xl p-2 buttons"></ion-icon></button>
+      <button class="mr-2  block p-2 rounded-full"><ion-icon name="heart-outline" class="text-4xl"></ion-icon></button>
+      <button class="mr-2  block p-2 rounded-full text-slate-400 text-4xl">...</button>
     </div>
   </div>
 
   <!-- song list   -->
   <div class="mt-10">
     <!-- song list header -->
-    <div class="flex text-gray-600">
+    <div class="flex text-slate-400 border-b border-gray-800">
       <div class="p-2 w-8 flex-shrink-0"></div>
       <div class="p-2 w-8 flex-shrink-0"></div>
       <div class="p-2 ">#</div>
       <div class="p-2 w-full">Titulo</div>
       <div class="p-2 w-full">ALBUM</div>
       <div class="p-2 w-full">DATA ADDED</div>
-
-
     </div>
-
-    {% for musica in object.musicas.all %}
-
-    <div class="flex border-b border-gray-800 hover:bg-gray-800">
-
-      <button class=""><ion-icon name="play" class="text-2xl" id="play-btn"></ion-icon></button>
-
-
-      <audio id="musica" src="{{ musica.musica.url }}"></audio>
-
-
-      <div class="p-3 w-8 flex-shrink-0">{{ forloop.counter }}</div>
-      <div class="p-3 w-8 flex-shrink-0">❤</div>
+  </div>
+{% for musica in object.musicas.all %}    
+    <section class="flex audioButton hover:bg-zinc-800 ">
+      <button type="button"><ion-icon name="play" class="text-2xl buttons "></ion-icon>
+      <audio class="audio"  src="{{ musica.musica.url }}"></audio></button>
+      <div class="p-3 w-8 flex-shrink-0 count">{{ forloop.counter }}</div>
       <div class="p-3 w-full">{{ musica.titulo }}</div>
       <div class="p-3 w-full">{{ musica.album }}</div>
       <div class="p-3 w-full">{{ musica.data.day }}/{{ musica.data.month }}/{{ musica.data.year }}</div>
-    </div>
-    {% endfor %}
+      
+    </section>
+{% endfor %}
 
-</div>
+
 </div>
 {% endblock %}

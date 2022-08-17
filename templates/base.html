@@ -8,6 +8,8 @@
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
     {% block head %}
     {% endblock %}
 </head>
@@ -16,28 +18,78 @@
     {% block content %}
     {% endblock %}
 
-    <script>
+<script>
 
-       var play_button = document.getElementById('play-btn');
+    var PlayList = new Array;
+    document.querySelectorAll(".audio").forEach((musica, i)=>{PlayList.push(musica) 
+    })
+    
+    var current = 0;
+    var sound;
+    var botao;
+    
+ 
+  
+document.querySelectorAll(".buttons").forEach((btn, i) => {   
+    i = i-1
+    btn.id = `botao${i}`     
+    btn.addEventListener("click", function (event){        
+    current = i    
+  
+    playSong ()
+    
 
-
-        play_button.addEventListener('click', ()=> {
-            audio =  play_button.getAttribute("name")
-            if(audio === "play"){
-            play_button.setAttribute("name", "pause")
-            musica.play(); /* Play movie */}else {
-            play_button.setAttribute("name", "play")
-            musica.pause()
+function playSong (){
+    document.getElementsByTagName("section")[current].id = `cor${current}`    
+    var audio = document.getElementById(`botao${current}`)     
+    var cor = document.getElementById(`cor${current}`)
+    if(audio.getAttribute("name")  === "play"){         
+        cor.classList.add("text-emerald-600") 
+        audio.setAttribute("name", "pause")                     
+        sound = PlayList[current]                   
+        sound.play();
+        sound.addEventListener('ended', function (event) {              
+            audio.setAttribute("name", "play")
+            cor.classList.remove("text-emerald-600")                               
+                nextSong()
+            }); 
+                    
+        }else {
+                audio.setAttribute("name", "play")
+                cor.classList.remove("text-emerald-600")              
+                sound.pause()
             }
-        }, false);
+    }
+
+    
+
+function nextSong() {        
+    current++;  
+    if (current >= urls.length) {    
+        sound.currentTime=0;    
+    }else{        
+        playSong ()   
+    }
+    }
 
 
-    </script>
+})   
+   
+     
+});
 
+
+
+
+
+</script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
 
 
 </body>
+
+
 </html>
